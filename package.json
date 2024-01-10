@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test --config ./src/config/playwright.config.ts"
+    "test": "npx playwright test --config ./src/config/playwright.config.ts",
+    "test:chrome": "npx playwright test --config ./src/config/playwright.chrome.config.ts",
+    "test:firefox": "npx playwright test --config ./src/config/playwright.firefox.config.ts",
+    "test:safari": "npx playwright test --config ./src/config/playwright.safari.config.ts"
   },
   "keywords": [],
   "author": "",
