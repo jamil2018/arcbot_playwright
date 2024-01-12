@@ -8,6 +8,7 @@ enum FileType {
   'PAGE' = 'pages',
   'ACTION' = 'actions',
   'COMPONENT' = 'components',
+  'TEST' = 'tests',
 }
 
 const createFile = (fileName: string, content: string, type: FileType) => {
@@ -72,6 +73,19 @@ class ${className} extends ComponentsCore {
 }    
 `
     createFile(fileName, content, FileType.COMPONENT)
+  })
+
+program
+  .command('create-test-file <fileName>')
+  .description('Create a new test')
+  .action((fileName: string) => {
+    const content = `import { test } from '@playwright/test'
+
+test('example test', async ({ page }) => {
+  console.log('write your tests here')
+})  
+`
+    createFile(fileName, content, FileType.TEST)
   })
 
 program.parse(process.argv)

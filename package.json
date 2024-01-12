@@ -10,7 +10,8 @@
     "test:safari": "npx playwright test --config ./src/config/playwright.safari.config.ts",
     "create-page": "ts-node src/utils/cli.util.ts create-page-file",
     "create-action": "ts-node src/utils/cli.util.ts create-action-file",
-    "create-component": "ts-node src/utils/cli.util.ts create-component-file"
+    "create-component": "ts-node src/utils/cli.util.ts create-component-file",
+    "create-test": "ts-node src/utils/cli.util.ts create-test-file"
   },
   "keywords": [],
   "author": "",
