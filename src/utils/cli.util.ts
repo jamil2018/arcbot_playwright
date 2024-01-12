@@ -66,7 +66,7 @@ program
     const content = `import { Page } from '@playwright/test'
 import { ComponentsCore } from '../core/component.core'
 
-class ${className} extends ComponentsCore {
+export class ${className} extends ComponentsCore {
   constructor(page: Page) {
     super(page)
   }

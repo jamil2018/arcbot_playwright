@@ -1,7 +1,7 @@
 import { Page } from '@playwright/test'
 import { ComponentsCore } from '../core/component.core'
 
-class FormComponent extends ComponentsCore {
+export class SampleComponent extends ComponentsCore {
   constructor(page: Page) {
     super(page)
   }

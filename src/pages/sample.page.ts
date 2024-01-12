@@ -1,10 +1,10 @@
 import { Page } from '@playwright/test'
 import { PagesCore } from '../core/pages.core'
 
-class LoginPage extends PagesCore {
+class SamplePage extends PagesCore {
   constructor(page: Page) {
     super(page)
   }
 }
 
-export { LoginPage }
+export { SamplePage }
