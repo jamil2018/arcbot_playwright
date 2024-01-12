@@ -1,4 +1,4 @@
-# Project Title
+# Arcbot Playwright
 
 Arcbot Playwright is a framework built for test automation using Playwright. The framework contains all the bells and whistles required for automating test scenarios. 
 
