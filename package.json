@@ -11,7 +11,9 @@
     "create-page": "ts-node src/utils/cli.util.ts create-page-file",
     "create-action": "ts-node src/utils/cli.util.ts create-action-file",
     "create-component": "ts-node src/utils/cli.util.ts create-component-file",
-    "create-test": "ts-node src/utils/cli.util.ts create-test-file"
+    "create-test": "ts-node src/utils/cli.util.ts create-test-file",
+    "generate-report": "npx allure generate src/reports -o src/reports/html",
+    "show-report": "npx allure open src/reports/html"
   },
   "keywords": [],
   "author": "",
@@ -22,6 +24,8 @@
     "@types/node": "^20.10.6",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
+    "allure-commandline": "^2.26.0",
+    "allure-playwright": "^2.10.0",
     "commander": "^11.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-playwright": "^0.21.0",
