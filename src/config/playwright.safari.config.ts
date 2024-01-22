@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test'
+import os from 'os'
 
 export default defineConfig({
   testDir: '../tests',
@@ -11,7 +12,23 @@ export default defineConfig({
   /* Opt out of parallel tests on CI. */
   workers: process.env.CI ? 1 : undefined,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
-  reporter: [['html', { outputFolder: '../reports' }]],
+  reporter: [
+    ['line'],
+    [
+      'allure-playwright',
+      {
+        outputFolder: 'src/reports',
+        suiteTitle: true,
+        detail: true,
+        environmentInfo: {
+          os_platform: os.platform(),
+          os_release: os.release(),
+          os_version: os.version(),
+          node_version: process.version,
+        },
+      },
+    ],
+  ],
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */

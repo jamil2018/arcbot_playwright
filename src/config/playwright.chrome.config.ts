@@ -1,5 +1,6 @@
 import { defineConfig, devices } from '@playwright/test'
 import { testPlanFilter } from 'allure-playwright/dist/testplan'
+import os from 'os'
 
 export default defineConfig({
   testDir: '../tests',
@@ -21,7 +22,12 @@ export default defineConfig({
         outputFolder: 'src/reports',
         suiteTitle: true,
         detail: true,
-        environmentInfo: {},
+        environmentInfo: {
+          os_platform: os.platform(),
+          os_release: os.release(),
+          os_version: os.version(),
+          node_version: process.version,
+        },
       },
     ],
   ],
