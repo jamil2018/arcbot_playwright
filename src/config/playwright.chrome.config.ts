@@ -1,9 +1,10 @@
 import { defineConfig, devices } from '@playwright/test'
 import { testPlanFilter } from 'allure-playwright/dist/testplan'
 import os from 'os'
+import { reportGenerationPath, testsPath } from './test.config'
 
 export default defineConfig({
-  testDir: '../tests',
+  testDir: testsPath,
   /* Run tests in files in parallel */
   fullyParallel: true,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
@@ -19,7 +20,7 @@ export default defineConfig({
     [
       'allure-playwright',
       {
-        outputFolder: 'src/reports',
+        outputFolder: reportGenerationPath,
         suiteTitle: true,
         detail: true,
         environmentInfo: {

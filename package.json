@@ -4,16 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "npx playwright test --config ./src/config/playwright.config.ts",
-    "test:chrome": "npx playwright test --config ./src/config/playwright.chrome.config.ts",
-    "test:firefox": "npx playwright test --config ./src/config/playwright.firefox.config.ts",
-    "test:safari": "npx playwright test --config ./src/config/playwright.safari.config.ts",
+    "cleanup-env": "ts-node src/utils/cleanup.util.ts",
+    "test": "playwright test --config ./src/config/playwright.config.ts",
+    "test:chrome": "playwright test --config ./src/config/playwright.chrome.config.ts",
+    "test:firefox": "playwright test --config ./src/config/playwright.firefox.config.ts",
+    "test:safari": "playwright test --config ./src/config/playwright.safari.config.ts",
     "create-page": "ts-node src/utils/cli.util.ts create-page-file",
     "create-action": "ts-node src/utils/cli.util.ts create-action-file",
     "create-component": "ts-node src/utils/cli.util.ts create-component-file",
     "create-test": "ts-node src/utils/cli.util.ts create-test-file",
-    "generate-report": "npx allure generate src/reports -o src/reports/html",
-    "show-report": "npx allure open src/reports/html"
+    "generate-report": "allure generate src/reports -o src/reports/html",
+    "show-report": "allure open src/reports/html"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +22,7 @@
   "devDependencies": {
     "@playwright/test": "^1.40.1",
     "@types/commander": "^2.12.2",
+    "@types/glob": "^8.1.0",
     "@types/node": "^20.11.5",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
@@ -29,6 +31,7 @@
     "commander": "^11.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-playwright": "^0.21.0",
+    "glob": "^10.3.10",
     "ts-node": "^10.9.2"
   }
 }
