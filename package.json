@@ -13,8 +13,8 @@
     "create-action": "ts-node src/utils/cli.util.ts create-action-file",
     "create-component": "ts-node src/utils/cli.util.ts create-component-file",
     "create-test": "ts-node src/utils/cli.util.ts create-test-file",
-    "generate-report": "allure generate src/reports -o src/reports/html",
-    "show-report": "allure open src/reports/html"
+    "generate-report": "allure generate src/reports/results -o src/reports/results/html",
+    "show-report": "allure open src/reports/results/html"
   },
   "keywords": [],
   "author": "",

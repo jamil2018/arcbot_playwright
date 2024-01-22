@@ -61,7 +61,7 @@ export default class ${className} extends ActionsCore {
 
 program
   .command('create-component-file <fileName> <className>')
-  .description('Create a new component class')
+  .description('Create a new component file with component class')
   .action((fileName: string, className: string) => {
     const content = `import { Page } from '@playwright/test'
 import { ComponentsCore } from '../core/component.core'
@@ -77,7 +77,7 @@ export class ${className} extends ComponentsCore {
 
 program
   .command('create-test-file <fileName>')
-  .description('Create a new test')
+  .description('Create a new test file')
   .action((fileName: string) => {
     const content = `import { test } from '@playwright/test'
 
