@@ -1,4 +1,4 @@
-pipeline{
+pipeline {
     agent any
 
     parameters {
@@ -22,21 +22,21 @@ pipeline{
             }
         }
         stage('Run Tests'){
-                steps {
-                    switch("${params.TEST_BROWSER}") {
-                        case 'Chrome':
-                            sh 'npm run test:chrome'
-                            break
-                        case 'Firefox':
-                            sh 'npm run test:firefox'
-                            break
-                        case 'Safari':
-                            sh 'npm run test:safari'
-                            break
-                        default:
-                            echo 'Invalid browser selected.'
-                    }
+            steps {
+                switch("${params.TEST_BROWSER}") {
+                    case 'Chrome':
+                        sh 'npm run test:chrome'
+                        break
+                    case 'Firefox':
+                        sh 'npm run test:firefox'
+                        break
+                    case 'Safari':
+                        sh 'npm run test:safari'
+                        break
+                    default:
+                        echo 'Invalid browser selected.'
                 }
             }
         }
     }
+}
