@@ -1,9 +1,5 @@
 pipeline{
-    agent{
-        docker{
-            image 'mcr.microsoft.com/playwright:v1.40.1-local'
-        }
-    }
+    agent any
     stages{
         stage('install dependencies'){
             steps{
