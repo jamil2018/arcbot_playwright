@@ -1,5 +1,10 @@
 pipeline{
     agent any
+
+    parameters {
+        choice(choices: ['Chrome', 'Firefox', 'Safari'], description: 'Select the browser to run tests on', name: 'TEST_BROWSER')
+    }
+
     stages{
         stage('Checkout SCM'){
             steps{
@@ -16,17 +21,22 @@ pipeline{
                 sh 'npx playwright install'
             }
         }
-        stage('Install Playwright Dependencies'){
-            steps{
-                sh 'sudo npx playwright install-deps'
-            }
-        }
         stage('Run Tests'){
-            steps{
-                sh '''
-                    npm run test:chrome
-                '''
+                steps {
+                    switch("${params.TEST_BROWSER}") {
+                        case 'Chrome':
+                            sh 'npm run test:chrome'
+                            break
+                        case 'Firefox':
+                            sh 'npm run test:firefox'
+                            break
+                        case 'Safari':
+                            sh 'npm run test:safari'
+                            break
+                        default:
+                            echo 'Invalid browser selected.'
+                    }
+                }
             }
         }
     }
-}
