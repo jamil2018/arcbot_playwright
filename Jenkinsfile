@@ -15,7 +15,10 @@ pipeline{
         }
         stage('run tests on chrome'){
             steps{
-                sh 'npm run test:chrome'
+                sh '''
+                    npx playwright test --list
+                    npm run test:chrome
+                '''
             }
         }
     }
