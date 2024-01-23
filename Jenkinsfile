@@ -27,20 +27,23 @@ pipeline{
             }
         }
         stage('Run Tests'){
+            // steps{
+            //     switch("${params.TEST_BROWSER}") {
+            //         case 'Chrome':
+            //             sh 'npm run test:chrome'
+            //             break
+            //         case 'Firefox':
+            //             sh 'npm run test:firefox'
+            //             break
+            //         case 'Safari':
+            //             sh 'npm run test:safari'
+            //             break
+            //         default:
+            //             sh 'npm test'
+            //     }
+            // }
             steps{
-                switch("${params.TEST_BROWSER}") {
-                    case 'Chrome':
-                        sh 'npm run test:chrome'
-                        break
-                    case 'Firefox':
-                        sh 'npm run test:firefox'
-                        break
-                    case 'Safari':
-                        sh 'npm run test:safari'
-                        break
-                    default:
-                        sh 'npm test'
-                }
+                sh 'npm run test:chrome'
             }
         }
     }
