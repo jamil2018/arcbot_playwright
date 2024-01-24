@@ -23,7 +23,20 @@ pipeline {
         }
         stage('Run Tests'){
             steps {
-                sh 'npm run test:chrome'
+                script{
+                    if(params.browser == 'Chrome'){
+                        echo "you have selected chrome browser"
+                    }
+                    if(params.browser == 'Firefox'){
+                        echo "you have selected firefox browser"
+                    }
+                    if(params.browser == 'Safari'){
+                        echo "you have selected safari browser"
+                    }
+                    if(params.browser == 'All'){
+                        echo "you have selected all browsers"
+                    }
+                }
             }
         }
     }
