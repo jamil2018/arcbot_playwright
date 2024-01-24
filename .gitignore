@@ -3,7 +3,4 @@ node_modules/
 /playwright-report/
 /blob-report/
 /playwright/.cache/
-src/reports/*.html
-src/reports/*.json
-src/reports/*.properties
-src/reports/html/*
+src/reports/results
