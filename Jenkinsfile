@@ -22,9 +22,9 @@ pipeline {
             }
         }
         stage('Run Tests'){
-            currentBuild.displayName = 'E2E Functional Test'
             steps {
                 script{
+                    currentBuild.displayName = 'E2E Functional Test'
                     if(params.browser == 'Chrome'){
                         currentBuild.description = 'Browser(s): Chrome'
                         sh 'npm run test:chrome'
