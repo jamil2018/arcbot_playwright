@@ -44,15 +44,5 @@ pipeline {
                 }
             }
         }
-        stage('Generate Report'){
-            steps{
-                sh 'npm run generate-report'
-            }
-        }
-        stage('Show Report'){
-            steps{
-                sh 'npm run show-report'
-            }
-        }
     }
 }
