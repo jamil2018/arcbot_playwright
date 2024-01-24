@@ -28,13 +28,13 @@ pipeline {
                         sh 'npm run test:chrome'
                     }
                     if(params.browser == 'Firefox'){
-                        echo "you have selected firefox browser"
+                        sh 'npm run test:firefox'
                     }
                     if(params.browser == 'Safari'){
-                        echo "you have selected safari browser"
+                        sh 'npm run test:safari'
                     }
                     if(params.browser == 'All'){
-                        echo "you have selected all browsers"
+                        sh 'npm test'
                     }
                 }
             }
