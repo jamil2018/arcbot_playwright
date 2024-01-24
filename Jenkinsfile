@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script{
                     if(params.browser == 'Chrome'){
-                        echo "you have selected chrome browser"
+                        sh 'npm run test:chrome'
                     }
                     if(params.browser == 'Firefox'){
                         echo "you have selected firefox browser"
