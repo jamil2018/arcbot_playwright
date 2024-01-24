@@ -23,19 +23,7 @@ pipeline {
         }
         stage('Run Tests'){
             steps {
-                switch("${params.browser}") {
-                    case 'Chrome':
-                        sh 'npm run test:chrome'
-                        break
-                    case 'Firefox':
-                        sh 'npm run test:firefox'
-                        break
-                    case 'Safari':
-                        sh 'npm run test:safari'
-                        break
-                    default:
-                        echo 'Invalid browser selected.'
-                }
+                sh 'npm run test:chrome'
             }
         }
     }
