@@ -23,7 +23,7 @@ pipeline {
         }
         stage('Run Tests'){
             steps {
-                switch("${params.TEST_BROWSER}") {
+                switch("${params.browser}") {
                     case 'Chrome':
                         sh 'npm run test:chrome'
                         break
