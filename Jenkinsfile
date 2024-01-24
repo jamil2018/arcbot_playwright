@@ -1,8 +1,8 @@
 pipeline {
     agent any
 
-    parameters {
-        choice(choices: ['Chrome', 'Firefox', 'Safari'], description: 'Select the browser to run tests on', name: 'TEST_BROWSER')
+    parameters { 
+        choice(name: 'browser', choices: ['All', 'Chrome', 'Firefox', 'Safari'], description: 'Select the Browser(s) to Run Tests') 
     }
 
     stages{
