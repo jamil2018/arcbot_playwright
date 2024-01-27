@@ -73,3 +73,62 @@ The Result Layer is responsible for handling the outcome of the test execution. 
 #### Report
 
 Contains the test reports once the tests have finished executing. These reports provide detailed information about each test scenario, including whether it passed or failed, and any relevant logs or error messages.
+
+## Setup
+
+The framework uses Node.js and TypeScript as its primary languages. Ensure that your environment meets the following requirements:
+
+### Required Software
+
+1. Node.js (version: 20.x.x or up)
+2. Visual Studio Code (version: 1.85.x or up)
+3. WSL 2 with Ubuntu (version: 22.04 or up)
+4. Java (version: 21.x or up)
+
+### Required VS Code Extensions
+
+1. Playwright Test for VSCode
+2. Prettier - Code formatter
+3. GitLens
+4. ESLint
+
+## Installation Steps
+
+Follow these steps to set up the project:
+
+1. Clone the repository to your work directory.
+2. Open the repository in Visual Studio Code.
+3. Open the terminal in VS Code and run the following command: `npm install`
+4. After the required packages have been installed, run the following command: `npx playwright install`
+
+## Running Tests
+
+The framework provides scripts for running tests across different browser configurations. Here's how you can execute tests:
+
+- To run tests across all browsers, execute the following command: `npm run test`
+- To run tests specifically on Chrome, use the command: `npm run test:chrome`
+- To run tests specifically on Firefox, use the command: `npm run test:firefox`
+- To run tests specifically on Safari, use the command: `npm run test:safari`
+
+## Using the CLI
+
+The framework provides a Command Line Interface (CLI) to simplify the creation of objects (pages, actions, components, and tests) for developing tests. Here's how you can use the CLI:
+
+- To create a new Page file, run the following command: `npm run create-page <file name> <class name>`. For example: `npm run create-page login.page.ts LoginPage`
+- To create a new Component file, run the following command: `npm run create-component <file name> <class name>`. For example: `npm run create-component form.component.ts FormComponent`
+- To create a new Action file, run the following command: `npm run create-action <file name> <class name>`. For example: `npm run create-action login.action.ts LoginAction`
+- To create a new Test file, run the following command: `npm run create-test <file name>`. For example: `npm run create-test login.spec.ts`
+
+## Reporting
+
+The framework uses the Allure reporting framework to generate comprehensive HTML reports. The reports folder contains the metadata files needed for generating the reports.
+
+To generate the actual HTML reports, run the following command in the console: `npm run generate-report`
+
+Once the reports are generated, you can view them by running the following command: `npm run show-report`
+
+## Cleanup
+
+The framework creates some metadata files to generate and show reports. In order to clean up those files, we can use the following script: `npm run cleanup-env`.
+
+This will delete all the old metadata files. It is recommended to run a cleanup before each test run to ensure that the reports are accurate and up-to-date.
