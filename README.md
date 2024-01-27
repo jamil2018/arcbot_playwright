@@ -8,6 +8,8 @@ Arcbot Playwright is a robust framework designed for test automation using Playw
 
 The framework operates on a layered architecture, providing a modular approach to test automation. Each layer plays a critical role in the testing process, ensuring a seamless and efficient execution of tests.
 
+![Playwright Framework](https://github.com/jamil2018/arcbot_playwright/assets/43118676/9b0fbaf2-873d-41b0-a584-abc1e83404da)
+
 The **Ignition Layer** is responsible for initiating the tests and performing any necessary pre-flight checks. The `package.json` file serves as the initializer for executing the tests, containing the necessary scripts and dependencies required to run the tests.
 
 The **Execution Layer** is the core of the framework, orchestrating the execution of all tests. It comprises several key components including Pages, Components, Actions, and Tests, each playing a crucial role in simulating user interactions and validating the application's behavior.
@@ -132,3 +134,7 @@ Once the reports are generated, you can view them by running the following comma
 The framework creates some metadata files to generate and show reports. In order to clean up those files, we can use the following script: `npm run cleanup-env`.
 
 This will delete all the old metadata files. It is recommended to run a cleanup before each test run to ensure that the reports are accurate and up-to-date.
+
+## CI/CD
+
+(update ongoing)
