@@ -34,7 +34,7 @@ program
     const content = `import { Page } from '@playwright/test'
 import { PagesCore } from '../core/pages.core'
 
-export default class ${className} extends PagesCore {
+export class ${className} extends PagesCore {
   constructor(page: Page) {
     super(page)
   }
@@ -50,7 +50,7 @@ program
     const content = `import { ActionsCore } from '../core/actions.core'
 import { PagesCore } from '../core/pages.core'
 
-export default class ${className} extends ActionsCore {
+export class ${className} extends ActionsCore {
   constructor(page: PagesCore) {
     super(page)
   }

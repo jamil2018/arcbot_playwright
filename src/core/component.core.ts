@@ -1,11 +1,9 @@
 import { Page } from '@playwright/test'
 
-class ComponentsCore {
+export class ComponentsCore {
   protected page: Page
 
   constructor(page: Page) {
     this.page = page
   }
 }
-
-export { ComponentsCore }

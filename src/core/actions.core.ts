@@ -1,7 +1,8 @@
 import { Page } from '@playwright/test'
 import { PagesCore } from './pages.core'
+import { allure } from 'allure-playwright'
 
-class ActionsCore {
+export class ActionsCore {
   protected page: PagesCore
   private _pageInstance: Page
   constructor(page: PagesCore) {
@@ -9,9 +10,10 @@ class ActionsCore {
     this._pageInstance = page.pageInstance
   }
 
-  async navigateToSite(path: string) {
-    await this._pageInstance.goto(path)
+  async navigateToSite(path: string = '/') {
+    await allure.step(
+      `navigate to test site: ${path}`,
+      async () => await this._pageInstance.goto(path)
+    )
   }
 }
-
-export { ActionsCore }

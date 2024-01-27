@@ -1,15 +1,13 @@
-import { Page } from "@playwright/test";
+import { Page } from '@playwright/test'
 
-class PagesCore {
-  protected page: Page;
+export class PagesCore {
+  protected page: Page
 
   constructor(page: Page) {
-    this.page = page;
+    this.page = page
   }
 
   get pageInstance(): Page {
-    return this.page;
+    return this.page
   }
 }
-
-export { PagesCore };
