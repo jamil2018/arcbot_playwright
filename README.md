@@ -118,7 +118,7 @@ The framework provides a Command Line Interface (CLI) to simplify the creation o
 
 - To create a new Page file, run the following command: `npm run create-page <file name> <class name>`. For example: `npm run create-page login.page.ts LoginPage`
 - To create a new Component file, run the following command: `npm run create-component <file name> <class name>`. For example: `npm run create-component form.component.ts FormComponent`
-- To create a new Action file, run the following command: `npm run create-action <file name> <class name>`. For example: `npm run create-action login.action.ts LoginAction`
+- To create a new Action file, run the following command: `npm run create-action <file name> <action class name> <page class name> <page class file>`. For example: `npm run create-action registration.action.ts RegistrationAction RegistrationPage registration.page.ts`
 - To create a new Test file, run the following command: `npm run create-test <file name>`. For example: `npm run create-test login.spec.ts`
 
 ## Reporting
