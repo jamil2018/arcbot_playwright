@@ -16,13 +16,13 @@ The **Support Layer** houses all the supporting functionality for running tests 
 
 Finally, the **Result Layer** handles the generation of test reports once the tests have finished executing.
 
-### Ignition Layer
+### <u>Ignition Layer</u>
 
 The Ignition Layer is the first layer of the framework and is responsible for initiating the tests and performing any necessary pre-flight checks before the tests begin execution.
 
 In this project, the `package.json` file serves as the initializer for executing the tests. This file contains the necessary scripts and dependencies required to run the tests.
 
-### Execution Layer
+### <u>Execution Layer</u>
 
 The Execution Layer is the heart of the framework, responsible for orchestrating the execution of all tests. It comprises several key components, each playing a crucial role in the testing process.
 
@@ -42,7 +42,7 @@ Actions define the steps that a test will take. They utilize pages and component
 
 Tests are the actual scenarios that the framework executes. They instantiate pages and components, and use actions to simulate user interactions and validate the application's behavior.
 
-### Support Layer
+### <u>Support Layer</u>
 
 All the supporting functionality for running tests smoothly is stored in this layer. This layer is divided into the following sections.
 
@@ -66,7 +66,7 @@ Contains the utility classes for running the framework. Currently, it contains u
 
 Contains the data files for running the tests. These files provide the input data that the tests use to validate the application's behavior.
 
-### Result Layer
+### <u>Result Layer</u>
 
 The Result Layer is responsible for handling the outcome of the test execution. It processes the results of the tests and generates a report detailing the success or failure of each test scenario.
 
