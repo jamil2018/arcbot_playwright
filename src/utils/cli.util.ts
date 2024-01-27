@@ -44,20 +44,29 @@ export class ${className} extends PagesCore {
   })
 
 program
-  .command('create-action-file <fileName> <className>')
+  .command(
+    'create-action-file <fileName> <actionClassName> <pageClassName> <pageClassFile>'
+  )
   .description('Create a new action class')
-  .action((fileName: string, className: string) => {
-    const content = `import { ActionsCore } from '../core/actions.core'
-import { PagesCore } from '../core/pages.core'
+  .action(
+    (
+      fileName: string,
+      actionClassName: string,
+      pageClassName: string,
+      pageClassFileName: string
+    ) => {
+      const content = `import { ActionsCore } from '../core/actions.core'
+import { ${pageClassName} } from '../pages/${pageClassFileName}'
 
-export class ${className} extends ActionsCore {
-  constructor(page: PagesCore) {
+export class ${actionClassName} extends ActionsCore {
+  constructor(page: ${pageClassName}) {
     super(page)
   }
 }
 `
-    createFile(fileName, content, FileType.ACTION)
-  })
+      createFile(fileName, content, FileType.ACTION)
+    }
+  )
 
 program
   .command('create-component-file <fileName> <className>')
