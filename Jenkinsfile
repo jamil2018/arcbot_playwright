@@ -1,5 +1,5 @@
 pipeline {
-    agent any
+    agent { docker { image 'mcr.microsoft.com/playwright:v1.40.1-jammy' } }
 
     parameters { 
         choice(name: 'browser', choices: ['All', 'Chrome', 'Firefox', 'Safari'], description: 'Select the Browser(s) to Run Tests') 
