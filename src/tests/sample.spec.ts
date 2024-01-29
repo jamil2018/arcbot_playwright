@@ -31,5 +31,6 @@ test.describe('Authentication validation', () => {
     await loginActions.fillUpUsernameField(loginPageData.username)
     await loginActions.fillUpPasswordField(loginPageData.password)
     await loginActions.clickOnLoginButton()
+    await loginActions.validateSuccessfulLogin()
   })
 })
