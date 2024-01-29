@@ -137,4 +137,44 @@ This will delete all the old metadata files. It is recommended to run a cleanup 
 
 ## CI/CD
 
-(update ongoing)
+The project uses Jenkins for Continuous Integration and Continuous Deployment. The Jenkinsfile defines the pipeline stages and steps.
+
+### Stages
+
+1. **Checkout SCM**: This stage checks out the source code management system.
+
+2. **Install Node Dependencies**: This stage installs the necessary Node.js dependencies using `npm install`.
+
+3. **Install Browsers**: This stage installs the required browsers using `npx playwright install`.
+
+4. **Run Tests**: This stage runs the tests based on the selected browser(s). The available options are 'All', 'Chrome', 'Firefox', and 'Safari'. If 'All' is selected, the tests will run on all three browsers.
+
+### Parameters
+
+The pipeline accepts a parameter named 'browser' which allows you to select the browser(s) to run the tests on.
+
+### Error Handling
+
+In case of any errors during the execution of the pipeline, the error message will be displayed and the build result will be marked as 'FAILURE'.
+
+### Using the CI/CD Pipeline
+
+Follow these steps to use the CI/CD pipeline:
+
+1. **Clone the Repository**: Clone the repository to your local machine using Git.
+
+2. **Access Jenkins**: Open your web browser and navigate to your Jenkins server.
+
+3. **Create a New Job**: Click on 'New Item' on the Jenkins dashboard. Enter a name for the job and select 'Pipeline', then click 'OK'.
+
+4. **Configure the Pipeline**: In the 'Pipeline' section, select 'Pipeline script from SCM'. Choose 'Git' as the SCM and enter the URL of your repository.
+
+5. **Set the Branch Specifier**: In the 'Branch Specifier' field, enter the branch name (for example, 'main').
+
+6. **Define the Parameter**: In the 'Parameters' section, define a string parameter named 'browser' with the default value 'All'.
+
+7. **Save the Job**: Click 'Save' to save the job configuration.
+
+8. **Run the Job**: To run the job, click 'Build Now' on the job page.
+
+During the execution of the pipeline, you can monitor the progress and view the console output in real time. If any errors occur, they will be displayed in the console output.
