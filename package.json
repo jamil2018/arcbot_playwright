@@ -33,6 +33,7 @@
     "eslint": "^8.56.0",
     "eslint-plugin-playwright": "^0.21.0",
     "glob": "^10.3.10",
+    "nodemailer": "^6.9.8",
     "ts-node": "^10.9.2"
   }
 }
