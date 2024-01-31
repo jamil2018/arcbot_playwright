@@ -37,7 +37,7 @@ export async function sendEmail(emails: string[], subject: string) {
 
   // Define the email options
   const mailOptions = {
-    from: 'hasnat.jamil@enosisbd.com',
+    from: '<sender email>',
     to: emails.join(','),
     subject: subject,
     html: htmlContent,
