@@ -16,7 +16,8 @@ export default defineConfig({
   grep: testPlanFilter(),
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
-    ['../utils/emailReporter.util.ts'],
+    ['../utils/jsonReporter.util.ts'],
+    ['list'],
     [
       'allure-playwright',
       {
