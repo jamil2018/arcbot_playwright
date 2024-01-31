@@ -1,18 +1,17 @@
 import type {
-  FullConfig,
   FullResult,
   Reporter,
-  Suite,
   TestCase,
   TestResult,
 } from '@playwright/test/reporter'
+import { saveJsonFile } from './file.util'
 
-enum StatusTypes {
-  'PASSED' = 'passed',
-  'FAILED' = 'failed',
-  'TIMEDOUT' = 'timedOut',
-  'SKIPPED' = 'skipped',
-  'INTERRUPTED' = 'interrupted',
+const StatusTypes = {
+  PASSED: 'passed',
+  FAILED: 'failed',
+  TIMEDOUT: 'timedOut',
+  SKIPPED: 'skipped',
+  INTERRUPTED: 'interrupted',
 }
 
 interface TestReport {
@@ -27,52 +26,55 @@ interface TestReport {
 class EmailReporter implements Reporter {
   private testReport: TestReport[] = []
 
-  instantiateNewTestResult() {
-    this.testReport.push({
-      suite: '',
+  instantiateNewTestResult(suite: string) {
+    const newTestResult: TestReport = {
+      suite,
       totalTestsPassed: 0,
       totalTestsFailed: 0,
       totalTestsTimedOut: 0,
       totalTestSkipped: 0,
       totalTestInterrupted: 0,
-    })
+    }
+    this.testReport.push(newTestResult)
   }
-
   generateSuiteTestResult() {
-    console.log(`
-        test passed: ${this._suiteTestPassCount}
-        test failed: ${this._suiteTestFailCount}
-        test timed out: ${this._suiteTestTimeoutCount}
-        test skipped: ${this._suiteTestSkippedCount}
-        test interrupted: ${this._suiteTestInterruptedCount}
-    `)
+    const testReportJson = this.testReport.map((i) => ({
+      suite: i.suite,
+      result: {
+        pass: i.totalTestsPassed,
+        fail: i.totalTestsFailed,
+        timedOut: i.totalTestsTimedOut,
+        skipped: i.totalTestSkipped,
+        interrupted: i.totalTestInterrupted,
+      },
+    }))
+    saveJsonFile('../reports/results/json', 'testResult', testReportJson)
   }
 
   updateTestResultCounters(result: TestResult, suite: string) {
-    const currentSuite = this.testReport.find((t) => t.suite === suite)
-    if (currentSuite === null) return
-    else {
-      switch (result.status) {
-        case StatusTypes.PASSED:
-          currentSuite.totalTestsPassed = currentSuite.totalTestsPassed++
-          break
-        case StatusTypes.FAILED:
-          this._suiteTestFailCount++
-          break
-        case StatusTypes.TIMEDOUT:
-          this._suiteTestTimeoutCount++
-          break
-        case StatusTypes.SKIPPED:
-          this._suiteTestSkippedCount++
-          break
-        case StatusTypes.INTERRUPTED:
-          this._suiteTestInterruptedCount++
-      }
+    let currentSuiteIndex = this.testReport.findIndex((t) => t.suite === suite)
+    if (currentSuiteIndex === -1) {
+      this.instantiateNewTestResult(suite)
+      currentSuiteIndex = this.testReport.length - 1
     }
-  }
-  onBegin(config: FullConfig, suite: Suite) {
-    console.log(`Total tests: ${suite.allTests.length}`)
-    this.resetTestResultCounters()
+
+    const currentSuite = this.testReport[currentSuiteIndex]
+    currentSuite.suite = suite
+
+    const counterMap: { [key in keyof typeof StatusTypes]?: keyof TestReport } =
+      {
+        [StatusTypes.PASSED]: 'totalTestsPassed',
+        [StatusTypes.FAILED]: 'totalTestsFailed',
+        [StatusTypes.TIMEDOUT]: 'totalTestsTimedOut',
+        [StatusTypes.SKIPPED]: 'totalTestSkipped',
+        [StatusTypes.INTERRUPTED]: 'totalTestInterrupted',
+      }
+
+    if (counterMap[result.status]) {
+      ++currentSuite[counterMap[result.status] as keyof TestReport]
+    }
+
+    this.testReport[currentSuiteIndex] = currentSuite
   }
 
   onTestBegin(test: TestCase) {

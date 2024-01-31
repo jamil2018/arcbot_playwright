@@ -5,7 +5,7 @@ import { allure } from 'allure-playwright'
 import { Severity } from 'allure-js-commons'
 import loginPageData from '../data/login.data.json'
 
-test.describe('Authentication validation', () => {
+test.describe('Authentication validation 2', () => {
   test.beforeAll(async () => {
     await allure.parentSuite('Web interface')
     await allure.suite('Essential features')
