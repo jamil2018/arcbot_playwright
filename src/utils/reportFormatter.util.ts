@@ -1,4 +1,17 @@
-export const generateHtmlTable = (data: {
+const generateTableHeader = () => {
+  return `
+        <tr>
+            <th>Test Suite</th>
+            <th>Passed</th>
+            <th>Failed</th>
+            <th>Timed Out</th>
+            <th>Skipped</th>
+            <th>Interrupted</th>
+        </tr>
+    `
+}
+
+const addTableRow = (data: {
   suite: string
   result: {
     pass: number
@@ -7,23 +20,38 @@ export const generateHtmlTable = (data: {
     skipped: number
     interrupted: number
   }
-}): string => {
+}) => {
   const { suite, result } = data
-  const passCount = result.pass
-  const failCount = result.fail
 
-  const table = `<table>
-        <tr>
-            <th>Test Suite</th>
-            <th>Passed</th>
-            <th>Failed</th>
-        </tr>
+  return `
         <tr>
             <td>${suite}</td>
-            <td>${passCount}</td>
-            <td>${failCount}</td>
+            <td>${result.pass}</td>
+            <td>${result.fail}</td>
+            <td>${result.timedOut}</td>
+            <td>${result.skipped}</td>
+            <td>${result.interrupted}</td>
         </tr>
-    </table>`
+    `
+}
 
+export const generateHtmlTable = (
+  data: {
+    suite: string
+    result: {
+      pass: number
+      fail: number
+      timedOut: number
+      skipped: number
+      interrupted: number
+    }
+  }[]
+): string => {
+  const rows = data.map((d) => addTableRow(d)).join('')
+  const table = `
+    <table>
+        ${generateTableHeader()}
+        ${rows}
+    </table>`
   return table
 }

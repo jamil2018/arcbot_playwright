@@ -5,6 +5,7 @@ import type {
   TestResult,
 } from '@playwright/test/reporter'
 import { saveJsonFile } from './file.util'
+import { sendEmail } from './email.util'
 
 const StatusTypes = {
   PASSED: 'passed',
@@ -37,7 +38,7 @@ class EmailReporter implements Reporter {
     }
     this.testReport.push(newTestResult)
   }
-  generateSuiteTestResult() {
+  async generateSuiteTestResult() {
     const testReportJson = this.testReport.map((i) => ({
       suite: i.suite,
       result: {
@@ -49,6 +50,7 @@ class EmailReporter implements Reporter {
       },
     }))
     saveJsonFile('../reports/results/json', 'testResult', testReportJson)
+    await sendEmail(['hasnatjamil2018@gmail.com'], 'Test Result')
   }
 
   updateTestResultCounters(result: TestResult, suite: string) {
@@ -86,9 +88,9 @@ class EmailReporter implements Reporter {
     this.updateTestResultCounters(result, test.parent.title)
   }
 
-  onEnd(result: FullResult) {
+  async onEnd(result: FullResult) {
     console.log(`Finished the run: ${result.status}`)
-    this.generateSuiteTestResult()
+    await this.generateSuiteTestResult()
   }
 }
 
