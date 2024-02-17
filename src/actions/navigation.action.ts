@@ -1,38 +1,32 @@
-import { Page } from "@playwright/test";
-import { ActionsCore } from "../core/actions.core";
-import {allure} from "allure-playwright"
-
+import { Page } from '@playwright/test'
+import { ActionsCore } from '../core/actions.core'
 
 export class NavigationAction extends ActionsCore {
-    constructor(page: Page){
-        super(page)
-    }
+  constructor(page: Page) {
+    super(page)
+  }
 
-    async navigateToPath(path: string = '/') {
-        await allure.step(
-          `navigating to path: ${path}`,
-          async () => await this.page.goto(path)
-        )
-    }
+  async navigateToPath(path: string = '/') {
+    await this.executeAction(`navigating to path: ${path}`, async () => {
+      await this.page.goto(path)
+    })
+  }
 
-    async refreshPage() {
-        await allure.step(
-          `refreshing page`,
-          async () => await this.page.reload()
-        )
-    }
+  async refreshPage() {
+    await this.executeAction(`refreshing the page`, async () => {
+      await this.page.reload()
+    })
+  }
 
-    async goBack() {
-        await allure.step(
-          `going back to previous page`,
-          async () => await this.page.goBack()
-        )
-    }
+  async goBack() {
+    await this.executeAction(`going back to previous page`, async () => {
+      await this.page.goBack()
+    })
+  }
 
-    async goForward() {
-        await allure.step(
-          `going forward to next page`,
-          async () => await this.page.goForward()
-        )
-    }
+  async goForward() {
+    await this.executeAction(`going forward to next page`, async () => {
+      await this.page.goForward()
+    })
+  }
 }

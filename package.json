@@ -42,6 +42,8 @@
     "eslint-plugin-playwright": "^0.21.0",
     "glob": "^10.3.10",
     "nodemailer": "^6.9.8",
+    "pino": "^8.19.0",
+    "pino-pretty": "^10.3.1",
     "ts-node": "^10.9.2"
   }
 }

@@ -1,9 +1,9 @@
 import { test } from '@playwright/test'
 import { LoginPage } from '../pages/login.page'
-import { LoginAction } from '../actions/login.action'
 import { allure } from 'allure-playwright'
 import { Severity } from 'allure-js-commons'
-import loginPageData from '../data/login.data.json'
+import { ActionBuilder } from '../actions/builder.action'
+import { routes } from '../routes/app.route'
 
 test.describe('Authentication validation', () => {
   test.beforeAll(async () => {
@@ -19,20 +19,11 @@ test.describe('Authentication validation', () => {
   test('validate authentication using username and password', async ({
     page,
   }) => {
-    // initializers
     const loginPage = new LoginPage(page)
-    const loginActions = new LoginAction(loginPage)
-
-    // setup test metadata
-    await allure.description(
-      'This test validates the login functionality of the application'
-    )
-
-    // execute test steps
-    await loginActions.navigateToSite('https://www.saucedemo.com/')
-    await loginActions.fillUpUsernameField(loginPageData.username)
-    await loginActions.fillUpPasswordField(loginPageData.password)
-    await loginActions.clickOnLoginButton()
-    await loginActions.validateSuccessfulLogin()
+    const actions = new ActionBuilder(page)
+    await actions.navigate.navigateToPath(routes.root)
+    await actions.input.typeInElement(loginPage.usernameField, 'standard_user')
+    await actions.input.typeInElement(loginPage.passwordField, 'secret_sauce')
+    await actions.mouse.clickOnElement(loginPage.loginBtn)
   })
 })

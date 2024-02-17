@@ -4,6 +4,7 @@ import {
   actionTimeout,
   baseURL,
   expectTimeout,
+  headless,
   localParallelWorkers,
   navigationTimeout,
   reportGenerationPath,
@@ -53,6 +54,7 @@ export default defineConfig({
     trace: 'on-first-retry',
     actionTimeout: actionTimeout,
     navigationTimeout: navigationTimeout,
+    headless: headless,
   },
 
   /* Configure projects for major browsers */

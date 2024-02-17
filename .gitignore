@@ -4,3 +4,6 @@ node_modules/
 /blob-report/
 /playwright/.cache/
 src/reports/results
+src/reports/screenshots/**/*.png
+src/reports/screenshots/**/*.jpeg
+src/logs/**/*.log
