@@ -1,6 +1,11 @@
 import { defineConfig, devices } from '@playwright/test'
 import os from 'os'
-import { reportGenerationPath, testsPath } from './test.config'
+import {
+  baseURL,
+  localParallelWorkers,
+  reportGenerationPath,
+  testsPath,
+} from './test.config'
 
 export default defineConfig({
   testDir: testsPath,
@@ -11,7 +16,7 @@ export default defineConfig({
   /* Retry on CI only */
   retries: process.env.CI ? 2 : 0,
   /* Opt out of parallel tests on CI. */
-  workers: process.env.CI ? 1 : undefined,
+  workers: process.env.CI ? 1 : localParallelWorkers,
   /* Reporter to use. See https://playwright.dev/docs/test-reporters */
   reporter: [
     ['../utils/jsonReporter.util.ts'],
@@ -34,7 +39,7 @@ export default defineConfig({
   /* Shared settings for all the projects below. See https://playwright.dev/docs/api/class-testoptions. */
   use: {
     /* Base URL to use in actions like `await page.goto('/')`. */
-    // baseURL: 'http://127.0.0.1:3000',
+    baseURL: baseURL,
 
     /* Collect trace when retrying the failed test. See https://playwright.dev/docs/trace-viewer */
     trace: 'on-first-retry',
