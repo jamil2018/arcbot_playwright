@@ -1,10 +1,9 @@
 {
   "name": "playwright_framework",
   "version": "1.0.0",
-  "description": "",
+  "description": "Playwright framework built for production level automation testing",
   "main": "index.js",
   "scripts": {
-    "cleanup-env": "ts-node src/utils/cleanup.util.ts",
     "test": "playwright test --config ./src/config/playwright.config.ts",
     "test:chrome": "playwright test --config ./src/config/playwright.chrome.config.ts",
     "test:firefox": "playwright test --config ./src/config/playwright.firefox.config.ts",
@@ -14,22 +13,31 @@
     "create-component": "ts-node src/utils/cli.util.ts create-component-file",
     "create-test": "ts-node src/utils/cli.util.ts create-test-file",
     "generate-report": "allure generate src/reports/results -o src/reports/results/html",
-    "show-report": "allure open src/reports/results/html"
+    "show-report": "allure open src/reports/results/html",
+    "cleanup-env": "ts-node src/utils/cleanup.util.ts"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": [
+    "playwright",
+    "typescript",
+    "automation",
+    "testing",
+    "framework"
+  ],
+  "author": "Md. Hasnat Jamil",
   "license": "ISC",
   "devDependencies": {
     "@playwright/test": "^1.40.1",
     "@types/commander": "^2.12.2",
     "@types/glob": "^8.1.0",
     "@types/node": "^20.11.7",
+    "@types/nodemailer": "^6.4.14",
     "@typescript-eslint/eslint-plugin": "^6.17.0",
     "@typescript-eslint/parser": "^6.17.0",
     "allure-commandline": "^2.26.0",
     "allure-js-commons": "^2.11.1",
     "allure-playwright": "^2.10.0",
     "commander": "^11.1.0",
+    "dotenv": "^16.4.1",
     "eslint": "^8.56.0",
     "eslint-plugin-playwright": "^0.21.0",
     "glob": "^10.3.10",
