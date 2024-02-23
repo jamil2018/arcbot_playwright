@@ -18,5 +18,3 @@ export const screenShotsPath =
   envConfig.screenShotsPath || path.join(__dirname, '../reports/screenshots')
 export const logsPath = envConfig.logsPath || 'src/logs'
 export const headless = envConfig.headless || false
-
-console.log(envConfig)

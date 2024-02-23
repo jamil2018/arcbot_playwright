@@ -8,7 +8,7 @@ export class InputAction extends ActionsCore {
 
   async typeInElement(locator: Locator, text: string) {
     await this.executeAction(
-      `typing text: ${text} into element with locator: ${locator.toString()}`,
+      `typing text: "${text}" into element with locator: ${locator.toString()}`,
       async () => {
         await locator.fill(text)
       }
