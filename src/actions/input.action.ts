@@ -23,4 +23,25 @@ export class InputAction extends ActionsCore {
       }
     )
   }
+
+  async checkCheckbox(locator: Locator) {
+    await this.executeAction(
+      `checking checkbox with locator: ${locator.toString()}`,
+      async () => await locator.check()
+    )
+  }
+
+  async uncheckCheckbox(locator: Locator) {
+    await this.executeAction(
+      `unchecking checkbox with locator: ${locator.toString()}`,
+      async () => await locator.uncheck()
+    )
+  }
+
+  async selectOption(locator: Locator, value: string) {
+    await this.executeAction(
+      `selecting option with value: ${value} from dropdown with locator: ${locator.toString()}`,
+      async () => await locator.selectOption({ value })
+    )
+  }
 }
