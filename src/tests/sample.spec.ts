@@ -1,9 +1,9 @@
 import { test } from '@playwright/test'
+import { LoginPage } from '../pages/login.page'
 import { allure } from 'allure-playwright'
 import { Severity } from 'allure-js-commons'
-import loginData from '../data/login.data.json'
+import { ActionBuilder } from '../actions/builder.action'
 import { routes } from '../routes/app.route'
-import { LoginAction } from '../actions/login.action'
 
 test.describe('Authentication validation', () => {
   test.beforeAll(async () => {
@@ -19,8 +19,11 @@ test.describe('Authentication validation', () => {
   test('validate authentication using username and password', async ({
     page,
   }) => {
-    const loginAction = new LoginAction(page)
-    await page.goto(routes.login)
-    await loginAction.login(loginData.username, loginData.password)
+    const loginPage = new LoginPage(page)
+    const actions = new ActionBuilder(page)
+    await actions.navigate.navigateToPath(routes.root)
+    await actions.input.typeInElement(loginPage.usernameField, 'standard_user')
+    await actions.input.typeInElement(loginPage.passwordField, 'secret_sauce')
+    await actions.mouse.clickOnElement(loginPage.loginBtn)
   })
 })
