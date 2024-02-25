@@ -14,7 +14,7 @@ export const testTimeout = envConfig.testTimeout || 10 * MINUTE
 export const navigationTimeout = envConfig.navigationTimeout || 2 * MINUTE
 export const actionTimeout = envConfig.actionTimeout || 1 * MINUTE
 export const loggingLevel = envConfig.loggingLevel || LOGLEVEL.DEBUG
-export const screenShotsPath =
-  envConfig.screenShotsPath || path.join(__dirname, '../reports/screenshots')
+export const outputPath =
+  envConfig.outputPath || path.join(__dirname, '../reports/output')
 export const logsPath = envConfig.logsPath || 'src/logs'
 export const headless = envConfig.headless || false

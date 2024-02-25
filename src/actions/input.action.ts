@@ -14,7 +14,6 @@ export class InputAction extends ActionsCore {
       }
     )
   }
-
   async clearElementText(locator: Locator) {
     await this.executeAction(
       `clearing text from element with locator: ${locator.toString()}`,

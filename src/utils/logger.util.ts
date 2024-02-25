@@ -1,41 +1,38 @@
-import { pino } from 'pino'
-import { loggingLevel, logsPath } from '../config/test.config'
+import winston from 'winston'
+import { logsPath } from '../config/test.config'
+import { Logger } from '@playwright/test'
 
-const generateLogFilePath = () => `${logsPath}/${Date.now()}.log`
+export const logger = winston.createLogger({
+  level: 'info',
+  format: winston.format.combine(
+    winston.format.json(),
+    winston.format.timestamp({
+      format: 'YYYY-MM-DD HH:mm:ss',
+    })
+  ),
+  transports: [
+    new winston.transports.File({
+      filename: 'error.log',
+      level: 'error',
+      dirname: logsPath,
+    }),
+    new winston.transports.File({
+      filename: 'combined.log',
+      dirname: logsPath,
+    }),
+    new winston.transports.Console({
+      format: winston.format.combine(
+        winston.format.colorize(),
+        winston.format.simple()
+      ),
+    }),
+  ],
+})
 
-let callCount = 0
-let filePath = ''
-
-const getFilePath = () => {
-  if (callCount === 0) {
-    callCount++
-    filePath = generateLogFilePath()
-  }
-  callCount++
-  return filePath
-}
-
-const loggerConfig = {
-  level: loggingLevel,
-  transport: {
-    targets: [
-      {
-        target: 'pino/file',
-        options: {
-          destination: getFilePath(),
-          level: loggingLevel,
-        },
-      },
-      {
-        target: 'pino-pretty',
-        options: {
-          colorize: true,
-          ignore: 'pid,hostname',
-          level: loggingLevel,
-        },
-      },
-    ],
+export const playwrightLogger: Logger = {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  isEnabled: (_name, _severity) => true,
+  log: (name, severity, message, args) => {
+    logger.log(severity, message.toString(), args)
   },
 }
-
-export const logger = pino(loggerConfig)

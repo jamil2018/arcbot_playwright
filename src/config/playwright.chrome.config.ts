@@ -7,15 +7,18 @@ import {
   headless,
   localParallelWorkers,
   navigationTimeout,
+  outputPath,
   reportGenerationPath,
   testTimeout,
   testsPath,
 } from './test.config'
+import { playwrightLogger } from '../utils/logger.util'
 
 export default defineConfig({
   testDir: testsPath,
   /* Run tests in files in parallel */
   fullyParallel: true,
+  outputDir: outputPath,
   /* Fail the build on CI if you accidentally left test.only in the source code. */
   forbidOnly: !!process.env.CI,
   /* Retry on CI only */
@@ -62,7 +65,12 @@ export default defineConfig({
   projects: [
     {
       name: 'chromium',
-      use: { ...devices['Desktop Chrome'] },
+      use: {
+        ...devices['Desktop Chrome'],
+        launchOptions: {
+          logger: playwrightLogger,
+        },
+      },
     },
   ],
 })

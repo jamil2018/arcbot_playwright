@@ -1,5 +1,6 @@
 import dotenv from 'dotenv'
 import path from 'path'
+import appRoot from 'app-root-path'
 
 dotenv.config({ path: path.join(__dirname, '../../.env') })
 
@@ -8,9 +9,7 @@ const parseToNumber = (value: string | undefined) => {
 }
 
 const getPath = (value: string | undefined) => {
-  return value
-    ? path.join(path.relative(__dirname, process.cwd()), value)
-    : undefined
+  return value ? path.join(appRoot.toString(), value) : undefined
 }
 
 export const envConfig = {
@@ -25,7 +24,7 @@ export const envConfig = {
   navigationTimeout: parseToNumber(process.env.NAVIGATION_TIMEOUT),
   actionTimeout: parseToNumber(process.env.ACTION_TIMEOUT),
   loggingLevel: process.env.LOGGING_LEVEL,
-  screenShotsPath: getPath(process.env.SCREEN_SHOTS_PATH),
+  outputPath: getPath(process.env.OUTPUT_PATH),
   logsPath: process.env.LOGS_PATH,
   headless: process.env.HEADLESS === 'true',
 }
