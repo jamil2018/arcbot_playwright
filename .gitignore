@@ -7,5 +7,5 @@ src/reports/results
 src/reports/output
 src/reports/screenshots/**/*.png
 src/reports/screenshots/**/*.jpeg
-src/logs/**/*.log
+src/logs
 .env
