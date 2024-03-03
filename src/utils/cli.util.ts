@@ -1,4 +1,4 @@
-import fs from 'fs'
+import fs from 'fs/promises'
 import path from 'path'
 import { Command } from 'commander'
 
@@ -11,13 +11,24 @@ enum FileType {
   'TEST' = 'tests',
 }
 
-const createFile = (fileName: string, content: string, type: FileType) => {
+const createFile = async (
+  fileName: string,
+  content: string,
+  type: FileType
+) => {
   const refactoredFileName = refactorFileName(fileName)
-  const filePath = path.join(__dirname, '..', type, `${refactoredFileName}.ts`)
-  fs.writeFile(filePath, content, (err) => {
-    if (err) throw err
+  const filePath = path.resolve(
+    __dirname,
+    '..',
+    type,
+    `${refactoredFileName}.ts`
+  )
+  try {
+    await fs.writeFile(filePath, content)
     console.log(`${fileName}.ts has been created`)
-  })
+  } catch (err) {
+    console.error(`Error creating file: ${err}`)
+  }
 }
 
 const refactorFileName = (fileName: string): string => {
@@ -27,11 +38,9 @@ const refactorFileName = (fileName: string): string => {
     .join('.')
 }
 
-program
-  .command('create-page-file <fileName> <className>')
-  .description('Create a new page class')
-  .action((fileName: string, className: string) => {
-    const content = `import { Page } from '@playwright/test'
+const getPageContent = (
+  className: string
+) => `import { Page } from '@playwright/test'
 import { PagesCore } from '../core/pages.core'
 
 export class ${className} extends PagesCore {
@@ -40,39 +49,22 @@ export class ${className} extends PagesCore {
   }
 }
 `
-    createFile(fileName, content, FileType.PAGE)
-  })
 
-program
-  .command(
-    'create-action-file <fileName> <actionClassName> <pageClassName> <pageClassFile>'
-  )
-  .description('Create a new action class')
-  .action(
-    (
-      fileName: string,
-      actionClassName: string,
-      pageClassName: string,
-      pageClassFileName: string
-    ) => {
-      const content = `import { ActionsCore } from '../core/actions.core'
-import { ${pageClassName} } from '../pages/${pageClassFileName}'
+const getActionContent = (
+  actionClassName: string
+) => `import { ActionsCore } from '../core/actions.core'
+import {Page} from "@playwright/test";
 
 export class ${actionClassName} extends ActionsCore {
-  constructor(page: ${pageClassName}) {
+  constructor(page: Page) {
     super(page)
   }
 }
 `
-      createFile(fileName, content, FileType.ACTION)
-    }
-  )
 
-program
-  .command('create-component-file <fileName> <className>')
-  .description('Create a new component file with component class')
-  .action((fileName: string, className: string) => {
-    const content = `import { Page } from '@playwright/test'
+const getComponentContent = (
+  className: string
+) => `import { Page } from '@playwright/test'
 import { ComponentsCore } from '../core/component.core'
 
 export class ${className} extends ComponentsCore {
@@ -81,6 +73,35 @@ export class ${className} extends ComponentsCore {
   }
 }    
 `
+
+const getTestContent = () => `import { test } from '@playwright/test'
+
+test('example test', async ({ page }) => {
+  console.log('write your tests here')
+})  
+`
+
+program
+  .command('create-page-file <fileName> <className>')
+  .description('Create a new page class')
+  .action((fileName: string, className: string) => {
+    const content = getPageContent(className)
+    createFile(fileName, content, FileType.PAGE)
+  })
+
+program
+  .command('create-action-file <fileName> <className>')
+  .description('Create a new action class')
+  .action((fileName: string, className: string) => {
+    const content = getActionContent(className)
+    createFile(fileName, content, FileType.ACTION)
+  })
+
+program
+  .command('create-component-file <fileName> <className>')
+  .description('Create a new component file with component class')
+  .action((fileName: string, className: string) => {
+    const content = getComponentContent(className)
     createFile(fileName, content, FileType.COMPONENT)
   })
 
@@ -88,12 +109,7 @@ program
   .command('create-test-file <fileName>')
   .description('Create a new test file')
   .action((fileName: string) => {
-    const content = `import { test } from '@playwright/test'
-
-test('example test', async ({ page }) => {
-  console.log('write your tests here')
-})  
-`
+    const content = getTestContent()
     createFile(fileName, content, FileType.TEST)
   })
 
