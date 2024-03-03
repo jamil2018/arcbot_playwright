@@ -4,6 +4,7 @@ import { allure } from 'allure-playwright'
 import { Severity } from 'allure-js-commons'
 import { ActionBuilder } from '../actions/builder.action'
 import { routes } from '../routes/app.route'
+import { SECOND } from '../constants/time.constant'
 
 test.describe('Authentication validation', () => {
   test.beforeAll(async () => {
@@ -26,7 +27,7 @@ test.describe('Authentication validation', () => {
     await actions.input.typeInElement(loginPage.passwordField, 'secret_sauce')
     await actions.mouse.clickOnElement(loginPage.loginBtn)
     await actions.expect.expectToBeVisible(page.locator('.app_logo'), {
-      timeout: 1000,
+      timeout: 1 * SECOND,
     })
   })
 
@@ -40,7 +41,7 @@ test.describe('Authentication validation', () => {
     await actions.input.typeInElement(loginPage.passwordField, 'secret')
     await actions.mouse.clickOnElement(loginPage.loginBtn)
     await actions.expect.expectToBeVisible(page.locator('.app_logo'), {
-      timeout: 1000,
+      timeout: 1 * SECOND,
     })
   })
 })
