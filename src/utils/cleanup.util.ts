@@ -2,9 +2,10 @@ import * as fs from 'fs'
 import * as glob from 'glob'
 import { outputPath, reportGenerationPath } from '../config/test.config'
 
-const files: string[] = glob.sync([reportGenerationPath, outputPath], {
+const files: string[] = glob.sync([reportGenerationPath!, outputPath!], {
   dot: true,
 })
+
 files.forEach((file: string) => {
   try {
     if (fs.statSync(file).isDirectory()) {
