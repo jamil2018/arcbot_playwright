@@ -1,10 +1,9 @@
-import { expect, test } from '@playwright/test'
+import { test } from '@playwright/test'
 import { LoginPage } from '../pages/login.page'
 import { allure } from 'allure-playwright'
 import { Severity } from 'allure-js-commons'
 import { ActionBuilder } from '../actions/builder.action'
 import { routes } from '../routes/app.route'
-import { logger } from '../utils/logger.util'
 
 test.describe('Authentication validation', () => {
   test.beforeAll(async () => {
@@ -26,22 +25,12 @@ test.describe('Authentication validation', () => {
     await actions.input.typeInElement(loginPage.usernameField, 'standard_user')
     await actions.input.typeInElement(loginPage.passwordField, 'secret_sauce')
     await actions.mouse.clickOnElement(loginPage.loginBtn)
-    await expect(page.locator('.app_logo')).toBeVisible({ timeout: 1000 })
-  })
-})
-
-test.describe('Authentication validation - negative test', () => {
-  test.beforeAll(async () => {
-    await allure.parentSuite('Web interface')
-    await allure.suite('Essential features')
-    await allure.subSuite('Authentication')
-  })
-  test.beforeEach(async () => {
-    // setup suite metadata
-    await allure.severity(Severity.CRITICAL)
+    await actions.expect.expectToBeVisible(page.locator('.app_logo'), {
+      timeout: 1000,
+    })
   })
 
-  test('validate authentication using username and password', async ({
+  test('validate authentication using incorrect username and password', async ({
     page,
   }) => {
     const loginPage = new LoginPage(page)
@@ -50,11 +39,8 @@ test.describe('Authentication validation - negative test', () => {
     await actions.input.typeInElement(loginPage.usernameField, 'standard_user')
     await actions.input.typeInElement(loginPage.passwordField, 'secret')
     await actions.mouse.clickOnElement(loginPage.loginBtn)
-    try {
-      await expect(page.locator('.app_logo')).toBeVisible({ timeout: 5000 })
-    } catch (error) {
-      logger.error(error.message)
-      throw error
-    }
+    await actions.expect.expectToBeVisible(page.locator('.app_logo'), {
+      timeout: 1000,
+    })
   })
 })

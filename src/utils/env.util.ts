@@ -1,15 +1,11 @@
 import dotenv from 'dotenv'
 import path from 'path'
-import appRoot from 'app-root-path'
+import { getPath } from './path.util'
 
 dotenv.config({ path: path.join(__dirname, '../../.env') })
 
 const parseToNumber = (value: string | undefined) => {
   return value ? parseInt(value) : undefined
-}
-
-const getPath = (value: string | undefined) => {
-  return value ? path.join(appRoot.toString(), value) : undefined
 }
 
 export const envConfig = {
