@@ -25,7 +25,7 @@ const createFile = async (
   )
   try {
     await fs.writeFile(filePath, content)
-    console.log(`${fileName}.ts has been created`)
+    console.log(`${refactoredFileName}.ts has been created`)
   } catch (err) {
     console.error(`Error creating file: ${err}`)
   }

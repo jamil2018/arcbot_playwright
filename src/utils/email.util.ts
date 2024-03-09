@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import fs from 'fs'
-import { generateHtmlTable } from './reportFormatter.util'
+import { generateHtmlTable } from './emailReportFormatter.util'
 import path from 'path'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any

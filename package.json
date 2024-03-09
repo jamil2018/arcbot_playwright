@@ -4,18 +4,17 @@
   "description": "Playwright framework built for production level automation testing",
   "main": "index.js",
   "scripts": {
-    "test": "playwright test --config ./src/config/playwright.config.ts",
-    "test:chrome": "playwright test --config ./src/config/playwright.chrome.config.ts",
-    "test:firefox": "playwright test --config ./src/config/playwright.firefox.config.ts",
-    "test:safari": "playwright test --config ./src/config/playwright.safari.config.ts",
+    "test": "npm run cleanup-env && playwright test --config ./src/config/playwright.config.ts",
+    "test:chrome": "npm run cleanup-env && playwright test --config ./src/config/playwright.chrome.config.ts",
+    "test:firefox": "npm run cleanup-env && playwright test --config ./src/config/playwright.firefox.config.ts",
+    "test:safari": "npm run cleanup-env && playwright test --config ./src/config/playwright.safari.config.ts",
     "create-page": "ts-node src/utils/cli.util.ts create-page-file",
     "create-action": "ts-node src/utils/cli.util.ts create-action-file",
     "create-component": "ts-node src/utils/cli.util.ts create-component-file",
     "create-test": "ts-node src/utils/cli.util.ts create-test-file",
     "generate-report": "allure generate src/reports/results -o src/reports/results/html",
     "show-report": "allure open src/reports/results/html",
-    "cleanup-env": "ts-node src/utils/cleanup.util.ts",
-    "index": "ts-node index.ts"
+    "cleanup-env": "ts-node src/utils/cleanup.util.ts"
   },
   "keywords": [
     "playwright",

@@ -6,8 +6,4 @@ export class PagesCore {
   constructor(page: Page) {
     this.page = page
   }
-
-  get pageInstance(): Page {
-    return this.page
-  }
 }

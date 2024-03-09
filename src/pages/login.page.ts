@@ -2,7 +2,7 @@ import { Locator, Page } from '@playwright/test'
 import { PagesCore } from '../core/pages.core'
 import { FormComponent } from '../components/form.component'
 
-class LoginPage extends PagesCore {
+export class LoginPage extends PagesCore {
   // locators
   private _loginBtn = this.page.locator('#login-button')
   private _shoppingCartLink = this.page.locator('.shopping_cart_link')
@@ -38,5 +38,3 @@ class LoginPage extends PagesCore {
     return this._shoppingCartLink
   }
 }
-
-export { LoginPage }

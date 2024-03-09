@@ -5,42 +5,62 @@ import { Severity } from 'allure-js-commons'
 import { ActionBuilder } from '../actions/builder.action'
 import { routes } from '../routes/app.route'
 import { SECOND } from '../constants/time.constant'
+import loginData from '../data/login.data.json'
+import { HomePage } from '../pages/home.page'
+
+// common test variable declarations
+let actions: ActionBuilder
+let loginPage: LoginPage
+let homePage: HomePage
 
 test.describe('Authentication validation', () => {
-  test.beforeAll(async () => {
+  test.beforeEach(async ({ page }) => {
+    // report metadata initialization
     await allure.parentSuite('Web interface')
     await allure.suite('Essential features')
     await allure.subSuite('Authentication')
-  })
-  test.beforeEach(async () => {
-    // setup suite metadata
-    await allure.severity(Severity.CRITICAL)
+
+    // test variable initialization
+    loginPage = new LoginPage(page)
+    actions = new ActionBuilder(page)
+    homePage = new HomePage(page)
   })
 
-  test('validate authentication using username and password', async ({
-    page,
-  }) => {
-    const loginPage = new LoginPage(page)
-    const actions = new ActionBuilder(page)
+  test('validate authentication using valid username and password', async () => {
+    // setup test metadata
+    await allure.severity(Severity.CRITICAL)
+    // actions
     await actions.navigate.navigateToPath(routes.root)
-    await actions.input.typeInElement(loginPage.usernameField, 'standard_user')
-    await actions.input.typeInElement(loginPage.passwordField, 'secret_sauce')
+    await actions.input.typeInElement(
+      loginPage.usernameField,
+      loginData.username
+    )
+    await actions.input.typeInElement(
+      loginPage.passwordField,
+      loginData.password
+    )
     await actions.mouse.clickOnElement(loginPage.loginBtn)
-    await actions.expect.expectToBeVisible(page.locator('.app_logo'), {
+    await actions.expect.expectToBeVisible(homePage.logo, {
       timeout: 1 * SECOND,
     })
   })
 
-  test('validate authentication using incorrect username and password', async ({
-    page,
-  }) => {
-    const loginPage = new LoginPage(page)
-    const actions = new ActionBuilder(page)
+  test('validate authentication using invalid username and password', async () => {
+    // setup test metadata
+    await allure.severity(Severity.CRITICAL)
+    // actions
     await actions.navigate.navigateToPath(routes.root)
-    await actions.input.typeInElement(loginPage.usernameField, 'standard_user')
-    await actions.input.typeInElement(loginPage.passwordField, 'secret')
+    await actions.input.typeInElement(
+      loginPage.usernameField,
+      loginData.username
+    )
+    await actions.input.typeInElement(
+      loginPage.passwordField,
+      loginData.password
+    )
     await actions.mouse.clickOnElement(loginPage.loginBtn)
-    await actions.expect.expectToBeVisible(page.locator('.app_logo'), {
+    // this test will fail
+    await actions.expect.expectToBeVisible(homePage.logo, {
       timeout: 1 * SECOND,
     })
   })

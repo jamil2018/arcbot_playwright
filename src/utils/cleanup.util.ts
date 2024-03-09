@@ -1,10 +1,17 @@
 import * as fs from 'fs'
 import * as glob from 'glob'
-import { outputPath, reportGenerationPath } from '../config/test.config'
+import {
+  logsPath,
+  outputPath,
+  reportGenerationPath,
+} from '../config/test.config'
 
-const files: string[] = glob.sync([reportGenerationPath!, outputPath!], {
-  dot: true,
-})
+const files: string[] = glob.sync(
+  [reportGenerationPath!, outputPath!, logsPath!],
+  {
+    dot: true,
+  }
+)
 
 files.forEach((file: string) => {
   try {

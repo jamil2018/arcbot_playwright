@@ -32,7 +32,7 @@ export const logger = winston.createLogger({
 export const playwrightLogger: Logger = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   isEnabled: (_name, _severity) => true,
-  log: (name, severity, message, args) => {
+  log: (_name, severity, message, args) => {
     logger.log(severity, message.toString(), args)
   },
 }
