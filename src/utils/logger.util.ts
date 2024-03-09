@@ -1,6 +1,6 @@
 import winston from 'winston'
-import { logsPath } from '../config/test.config'
 import { Logger } from '@playwright/test'
+import { logsPath } from '../config/test.config'
 
 export const logger = winston.createLogger({
   level: 'info',

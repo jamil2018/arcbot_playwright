@@ -21,6 +21,6 @@ export const envConfig = {
   actionTimeout: parseToNumber(process.env.ACTION_TIMEOUT),
   loggingLevel: process.env.LOGGING_LEVEL,
   outputPath: getPath(process.env.OUTPUT_PATH),
-  logsPath: process.env.LOGS_PATH,
+  logsPath: getPath(process.env.LOGS_PATH),
   headless: process.env.HEADLESS === 'true',
 }
