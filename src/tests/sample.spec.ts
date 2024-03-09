@@ -54,10 +54,7 @@ test.describe('Authentication validation', () => {
       loginPage.usernameField,
       loginData.username
     )
-    await actions.input.typeInElement(
-      loginPage.passwordField,
-      loginData.password
-    )
+    await actions.input.typeInElement(loginPage.passwordField, 'sdxc')
     await actions.mouse.clickOnElement(loginPage.loginBtn)
     // this test will fail
     await actions.expect.expectToBeVisible(homePage.logo, {
