@@ -5,7 +5,6 @@ import type {
   TestResult,
 } from '@playwright/test/reporter'
 import { saveJsonFile } from './file.util'
-import { sendEmail } from './email.util'
 
 const StatusTypes = {
   PASSED: 'passed',
@@ -50,7 +49,6 @@ class EmailReporter implements Reporter {
       },
     }))
     saveJsonFile('../reports/results/json', 'testResult', testReportJson)
-    await sendEmail(['hasnatjamil2018@gmail.com'], 'Test Result')
   }
 
   updateTestResultCounters(result: TestResult, suite: string) {

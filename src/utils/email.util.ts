@@ -2,6 +2,7 @@ import nodemailer from 'nodemailer'
 import fs from 'fs'
 import { generateHtmlTable } from './emailReportFormatter.util'
 import path from 'path'
+import { envConfig } from './env.util'
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function readJsonFile(filePath: string): any {
@@ -51,3 +52,14 @@ export async function sendEmail(emails: string[], subject: string) {
     console.error('Error sending email:', error)
   }
 }
+
+const emailSender = async () => {
+  const recipients = envConfig.emailRecipients
+  if (!recipients) {
+    console.log('No email recipients found. Skipping email sending.')
+    return
+  }
+  await sendEmail(recipients, 'Test Report')
+}
+
+await emailSender()
