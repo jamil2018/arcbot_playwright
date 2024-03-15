@@ -14,7 +14,14 @@
     "create-test": "ts-node src/utils/cli.util.ts create-test-file",
     "generate-report": "allure generate src/reports/results -o src/reports/results/html",
     "show-report": "allure open src/reports/results/html",
-    "cleanup-env": "ts-node src/utils/cleanup.util.ts"
+    "cleanup-env": "ts-node src/utils/cleanup.util.ts",
+    "copy-history": "ts-node src/utils/copyTestHistory.util.ts",
+    "move-history": "ts-node src/utils/moveTestHistory.util.ts",
+    "e2e": "npm run copy-history && npm run cleanup-env && (npm run test || true) && npm run move-history && npm run generate-report && npm run show-report",
+    "e2e:chrome": "npm run copy-history && npm run cleanup-env && (npm run test:chrome || true) && npm run move-history && npm run generate-report && npm run show-report",
+    "e2e:firefox": "npm run copy-history && npm run cleanup-env && (npm run test:firefox || true) && npm run move-history && npm run generate-report && npm run show-report",
+    "e2e:safari": "npm run copy-history && npm run cleanup-env && (npm run test:safari || true) && npm run move-history && npm run generate-report && npm run show-report",
+    "lint": "eslint . --ext .ts"
   },
   "keywords": [
     "playwright",
@@ -28,6 +35,7 @@
   "devDependencies": {
     "@playwright/test": "^1.40.1",
     "@types/commander": "^2.12.2",
+    "@types/fs-extra": "^11.0.4",
     "@types/glob": "^8.1.0",
     "@types/node": "^20.11.7",
     "@types/nodemailer": "^6.4.14",
@@ -41,6 +49,7 @@
     "dotenv": "^16.4.4",
     "eslint": "^8.56.0",
     "eslint-plugin-playwright": "^0.21.0",
+    "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
     "nodemailer": "^6.9.8",
     "ts-node": "^10.9.2",
