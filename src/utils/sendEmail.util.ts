@@ -16,7 +16,7 @@ function readJsonFile(filePath: string): any {
   }
 }
 
-export async function sendEmail(emails: string[], subject: string) {
+async function sendEmail(emails: string[], subject: string) {
   const jsonContent = readJsonFile(
     path.join(__dirname, '../reports/results/json/testResult.json')
   )
@@ -55,11 +55,17 @@ export async function sendEmail(emails: string[], subject: string) {
 
 const emailSender = async () => {
   const recipients = envConfig.emailRecipients
-  if (!recipients) {
+  if (!recipients || recipients.length === 0) {
     console.log('No email recipients found. Skipping email sending.')
     return
   }
   await sendEmail(recipients, 'Test Report')
 }
 
-await emailSender()
+;(async () => {
+  try {
+    await emailSender()
+  } catch (error) {
+    console.error('Error sending email:', error)
+  }
+})()
