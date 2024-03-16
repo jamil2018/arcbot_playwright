@@ -18,10 +18,10 @@
     "copy-history": "ts-node src/utils/copyTestHistory.util.ts",
     "move-history": "ts-node src/utils/moveTestHistory.util.ts",
     "send-email": "ts-node src/utils/sendEmail.util.ts",
-    "e2e": "npm run copy-history && npm run cleanup-env && (npm run test || true) && npm run move-history && npm run generate-report && npm run show-report && npm run send-email",
-    "e2e:chrome": "npm run copy-history && npm run cleanup-env && (npm run test:chrome || true) && npm run move-history && npm run generate-report && npm run show-report && npm run send-email",
-    "e2e:firefox": "npm run copy-history && npm run cleanup-env && (npm run test:firefox || true) && npm run move-history && npm run generate-report && npm run show-report  && npm run send-email",
-    "e2e:safari": "npm run copy-history && npm run cleanup-env && (npm run test:safari || true) && npm run move-history && npm run generate-report && npm run show-report && npm run send-email",
+    "e2e": "npm run copy-history && npm run cleanup-env && (npm run test || true) && npm run send-email && npm run move-history && npm run generate-report && npm run show-report",
+    "e2e:chrome": "npm run copy-history && npm run cleanup-env && (npm run test:chrome || true) && npm run send-email && npm run move-history && npm run generate-report && npm run show-report",
+    "e2e:firefox": "npm run copy-history && npm run cleanup-env && (npm run test:firefox || true) && npm run send-email && npm run move-history && npm run generate-report && npm run show-report",
+    "e2e:safari": "npm run copy-history && npm run cleanup-env && (npm run test:safari || true) && npm run send-email && npm run move-history && npm run generate-report && npm run show-report",
     "lint": "eslint . --ext .ts"
   },
   "keywords": [

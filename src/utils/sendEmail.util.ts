@@ -1,6 +1,6 @@
 import nodemailer from 'nodemailer'
 import fs from 'fs'
-import { generateHtmlTable } from './emailReportFormatter.util'
+import { generateHtmlContent } from './emailReportFormatter.util'
 import path from 'path'
 import { envConfig } from './env.util'
 
@@ -20,25 +20,24 @@ async function sendEmail(emails: string[], subject: string) {
   const jsonContent = readJsonFile(
     path.join(__dirname, '../reports/results/json/testResult.json')
   )
-  const htmlContent = generateHtmlTable(jsonContent)
-  // Create a transporter using Gmail's SMTP settings with OAuth2
+  const htmlContent = generateHtmlContent(jsonContent)
 
-  console.log('data from .env file client id:', process.env.EMAIL_CLIENT_ID)
+  // Create a transporter using Gmail's SMTP settings with OAuth2
   const transporter = nodemailer.createTransport({
     service: 'gmail',
     auth: {
       type: 'OAuth2',
-      user: '<user id>',
-      clientId: '<client id>',
-      clientSecret: '<client secret>',
-      refreshToken: '<refresh token>',
-      accessToken: '<access token>',
+      user: envConfig.email_sender,
+      clientId: envConfig.oauth_client_id,
+      clientSecret: envConfig.oauth_client_secret,
+      refreshToken: envConfig.oauth_refresh_token,
+      accessToken: envConfig.oauth_access_token,
     },
   })
 
   // Define the email options
   const mailOptions = {
-    from: '<sender email>',
+    from: envConfig.email_sender,
     to: emails.join(','),
     subject: subject,
     html: htmlContent,
@@ -55,11 +54,15 @@ async function sendEmail(emails: string[], subject: string) {
 
 const emailSender = async () => {
   const recipients = envConfig.emailRecipients
-  if (!recipients || recipients.length === 0) {
+  const validRecipients = recipients?.filter((email) => {
+    return email.includes('@')
+  })
+  if (!validRecipients || validRecipients.length === 0) {
     console.log('No email recipients found. Skipping email sending.')
     return
   }
-  await sendEmail(recipients, 'Test Report')
+  console.log('Sending email to the following email address(s):', recipients)
+  await sendEmail(validRecipients, 'Test Report')
 }
 
 ;(async () => {

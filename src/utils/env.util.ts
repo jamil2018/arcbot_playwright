@@ -23,4 +23,10 @@ export const envConfig = {
   outputPath: getPath(process.env.OUTPUT_PATH),
   logsPath: getPath(process.env.LOGS_PATH),
   headless: process.env.HEADLESS === 'true',
+  oauth_client_id: process.env.OAUTH_CLIENT_ID,
+  oauth_client_secret: process.env.OAUTH_CLIENT_SECRET,
+  oauth_redirect_uri: process.env.OAUTH_REDIRECT_URI,
+  oauth_refresh_token: process.env.OAUTH_REFRESH_TOKEN,
+  oauth_access_token: process.env.OAUTH_ACCESS_TOKEN,
+  email_sender: process.env.EMAIL_SENDER,
 }
