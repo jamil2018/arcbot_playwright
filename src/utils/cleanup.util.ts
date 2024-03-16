@@ -6,6 +6,8 @@ import {
   reportGenerationPath,
 } from '../config/test.config'
 
+console.log('Starting cleanup process...')
+
 const files: string[] = glob.sync(
   [reportGenerationPath!, outputPath!, logsPath!],
   {
@@ -28,3 +30,5 @@ files.forEach((file: string) => {
     }
   }
 })
+
+console.log('Cleanup process completed')

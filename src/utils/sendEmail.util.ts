@@ -53,16 +53,18 @@ async function sendEmail(emails: string[], subject: string) {
 }
 
 const emailSender = async () => {
+  console.log('Starting email sending process...')
   const recipients = envConfig.emailRecipients
   const validRecipients = recipients?.filter((email) => {
     return email.includes('@')
   })
   if (!validRecipients || validRecipients.length === 0) {
-    console.log('No email recipients found. Skipping email sending.')
+    console.log('No email recipients found. Skipping sending email.')
     return
   }
   console.log('Sending email to the following email address(s):', recipients)
   await sendEmail(validRecipients, 'Test Report')
+  console.log('Email sending process completed')
 }
 
 ;(async () => {

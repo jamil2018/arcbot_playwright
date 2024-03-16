@@ -47,14 +47,17 @@ test.describe('Authentication validation', () => {
 
   test('validate authentication using invalid username and password', async () => {
     // setup test metadata
-    await allure.severity(Severity.CRITICAL)
+    await allure.severity(Severity.BLOCKER)
     // actions
     await actions.navigate.navigateToPath(routes.root)
     await actions.input.typeInElement(
       loginPage.usernameField,
       loginData.username
     )
-    await actions.input.typeInElement(loginPage.passwordField, 'sdxc')
+    await actions.input.typeInElement(
+      loginPage.passwordField,
+      loginData.incorrect_password
+    )
     await actions.mouse.clickOnElement(loginPage.loginBtn)
     // this test will fail
     await actions.expect.expectToBeVisible(homePage.logo, {
