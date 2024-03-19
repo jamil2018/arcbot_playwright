@@ -107,10 +107,10 @@ Follow these steps to set up the project:
 
 The framework provides scripts for running tests across different browser configurations. Here's how you can execute tests:
 
-- To run tests across all browsers, execute the following command: `npm run test`
-- To run tests specifically on Chrome, use the command: `npm run test:chrome`
-- To run tests specifically on Firefox, use the command: `npm run test:firefox`
-- To run tests specifically on Safari, use the command: `npm run test:safari`
+- To run tests across all browsers, execute the following command: `npm run e2e`
+- To run tests specifically on Chrome, use the command: `npm run e2e:chrome`
+- To run tests specifically on Firefox, use the command: `npm run e2e:firefox`
+- To run tests specifically on Safari, use the command: `npm run e2e:safari`
 
 ## Using the CLI
 
@@ -133,7 +133,7 @@ Once the reports are generated, you can view them by running the following comma
 
 The framework creates some metadata files to generate and show reports. In order to clean up those files, we can use the following script: `npm run cleanup-env`.
 
-This will delete all the old metadata files. It is recommended to run a cleanup before each test run to ensure that the reports are accurate and up-to-date.
+This will delete all the old metadata files. It is recommended to run a cleanup before each test run to ensure that the reports are accurate and up-to-date. In fact, the startup script automatically runs the cleanup before each test run.
 
 ## CI/CD
 
