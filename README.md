@@ -8,7 +8,7 @@ Arcbot Playwright is a robust framework designed for test automation using Playw
 
 The framework operates on a layered architecture, providing a modular approach to test automation. Each layer plays a critical role in the testing process, ensuring a seamless and efficient execution of tests.
 
-![Playwright Framework](https://github.com/jamil2018/arcbot_playwright/assets/43118676/9b0fbaf2-873d-41b0-a584-abc1e83404da)
+![Playwright Framework](https://github.com/jamil2018/arcbot_playwright/assets/43118676/8c6e5c02-d3b7-452d-aafa-4ef0f1e49a3b)
 
 The **Ignition Layer** is responsible for initiating the tests and performing any necessary pre-flight checks. The `package.json` file serves as the initializer for executing the tests, containing the necessary scripts and dependencies required to run the tests.
 
