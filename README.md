@@ -8,7 +8,7 @@ Arcbot Playwright is a robust framework designed for test automation using Playw
 
 The framework operates on a layered architecture, providing a modular approach to test automation. Each layer plays a critical role in the testing process, ensuring a seamless and efficient execution of tests.
 
-![Playwright Framework](https://github.com/jamil2018/arcbot_playwright/assets/43118676/9b0fbaf2-873d-41b0-a584-abc1e83404da)
+![Playwright Framework](https://github.com/jamil2018/arcbot_playwright/assets/43118676/8c6e5c02-d3b7-452d-aafa-4ef0f1e49a3b)
 
 The **Ignition Layer** is responsible for initiating the tests and performing any necessary pre-flight checks. The `package.json` file serves as the initializer for executing the tests, containing the necessary scripts and dependencies required to run the tests.
 
@@ -76,6 +76,10 @@ The Result Layer is responsible for handling the outcome of the test execution. 
 
 Contains the test reports once the tests have finished executing. These reports provide detailed information about each test scenario, including whether it passed or failed, and any relevant logs or error messages.
 
+#### Logs
+
+The framework produces two varieties of logs. The first is displayed directly on the console, while the second is compiled into a file within the logs directory.
+
 ## Setup
 
 The framework uses Node.js and TypeScript as its primary languages. Ensure that your environment meets the following requirements:
@@ -84,7 +88,7 @@ The framework uses Node.js and TypeScript as its primary languages. Ensure that 
 
 1. Node.js (version: 20.x.x or up)
 2. Visual Studio Code (version: 1.85.x or up)
-3. WSL 2 with Ubuntu (version: 22.04 or up)
+3. WSL 2 with Ubuntu (version: 22.04 or up) (for using jenkins)
 4. Java (version: 21.x or up)
 
 ### Required VS Code Extensions
@@ -102,15 +106,40 @@ Follow these steps to set up the project:
 2. Open the repository in Visual Studio Code.
 3. Open the terminal in VS Code and run the following command: `npm install`
 4. After the required packages have been installed, run the following command: `npx playwright install`
+5. Create a `.env` file into the root directory. The file should have the following properties:
+
+```
+REPORT_GENERATION_PATH = (path where the report will be generated. eg: 'src/reports/results')
+OUTPUT_PATH = (path where the playwright output file will be stored. eg:'src/reports/output')
+TESTS_PATH = (path where the playwright test files will be stored. eg: 'src/tests')
+EMAIL_RECIPIENTS = (email addresses of people to whom the test results will be sent. eg: 'test@email.com', 'test2@gmail.com')
+BASE_URL = (root url of the application under test. eg: 'https://www.saucedemo.com/v1/')
+LOCAL_PARALLEL_WORKERS = (number of workers to use during local test execution. eg: 1)
+CI_PARALLEL_WORKERS = (number of workers to use during CI test execution. eg: 0)
+EXPECT_TIMEOUT = (time to wait for a expect condition to be met in milliseconds. eg: 180000)
+TEST_TIMEOUT = (time to wait for a test to be completed in milliseconds. eg: 600000)
+NAVIGATION_TIMEOUT = (time to navigate to a particular page in milliseconds. eg: 180000)
+ACTION_TIMEOUT = (time to complete the execution of a particular action(click, type etc.) in milliseconds. eg: 30000)
+LOGGING_LEVEL = (level of log files to be written. eg:'debug')
+LOGS_PATH = (path where the logs file will be stored. eg:'src/logs')
+HEADLESS = (boolean property to confirm whether to run tests in headless mode or not. eg: 'false')
+OAUTH_CLIENT_ID = (client id of the oauth client of google cloud email service.)
+OAUTH_CLIENT_SECRET = (client secret of the oauth client of google cloud email service.)
+OAUTH_REFRESH_TOKEN = (refresh token for accessing the google cloud email service.)
+OAUTH_ACCESS_TOKEN = (access token for accessing the google cloud email service.)
+OAUTH_REDIRECT_URI = (oauth redirect url for google cloud. this value is fixed. eg: 'https://developers.google.com/oauthplayground')
+EMAIL_SENDER = (email address of user who will be sending out the test result email. eg: 'test@test.com')
+NODE_TLS_REJECT_UNAUTHORIZED = (value to suppress error when node js tries to access unauthorized TLS connection. Should always be set to '0'. eg:'0')
+```
 
 ## Running Tests
 
 The framework provides scripts for running tests across different browser configurations. Here's how you can execute tests:
 
-- To run tests across all browsers, execute the following command: `npm run test`
-- To run tests specifically on Chrome, use the command: `npm run test:chrome`
-- To run tests specifically on Firefox, use the command: `npm run test:firefox`
-- To run tests specifically on Safari, use the command: `npm run test:safari`
+- To run tests across all browsers, execute the following command: `npm run e2e`
+- To run tests specifically on Chrome, use the command: `npm run e2e:chrome`
+- To run tests specifically on Firefox, use the command: `npm run e2e:firefox`
+- To run tests specifically on Safari, use the command: `npm run e2e:safari`
 
 ## Using the CLI
 
@@ -133,7 +162,7 @@ Once the reports are generated, you can view them by running the following comma
 
 The framework creates some metadata files to generate and show reports. In order to clean up those files, we can use the following script: `npm run cleanup-env`.
 
-This will delete all the old metadata files. It is recommended to run a cleanup before each test run to ensure that the reports are accurate and up-to-date.
+This will delete all the old metadata files. It is recommended to run a cleanup before each test run to ensure that the reports are accurate and up-to-date. In fact, the startup script automatically runs the cleanup before each test run.
 
 ## CI/CD
 
