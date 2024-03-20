@@ -88,7 +88,7 @@ The framework uses Node.js and TypeScript as its primary languages. Ensure that 
 
 1. Node.js (version: 20.x.x or up)
 2. Visual Studio Code (version: 1.85.x or up)
-3. WSL 2 with Ubuntu (version: 22.04 or up)
+3. WSL 2 with Ubuntu (version: 22.04 or up) (for using jenkins)
 4. Java (version: 21.x or up)
 
 ### Required VS Code Extensions
