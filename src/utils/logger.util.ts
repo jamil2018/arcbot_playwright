@@ -2,6 +2,13 @@ import winston from 'winston'
 import { Logger } from '@playwright/test'
 import { logsPath } from '../config/test.config'
 
+const generateLogPath = (): string => {
+  const currentDate = new Date().toISOString().split('T')[0]
+  return `${logsPath}/${currentDate}`
+}
+
+const logsDirectory = generateLogPath()
+
 export const logger = winston.createLogger({
   level: 'info',
   format: winston.format.combine(
@@ -14,11 +21,11 @@ export const logger = winston.createLogger({
     new winston.transports.File({
       filename: 'error.log',
       level: 'error',
-      dirname: logsPath,
+      dirname: logsDirectory,
     }),
     new winston.transports.File({
       filename: 'combined.log',
-      dirname: logsPath,
+      dirname: logsDirectory,
     }),
     new winston.transports.Console({
       format: winston.format.combine(
