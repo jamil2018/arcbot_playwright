@@ -52,6 +52,7 @@
     "eslint-plugin-playwright": "^0.21.0",
     "fs-extra": "^11.2.0",
     "glob": "^10.3.10",
+    "node-global-storage": "^2.0.0",
     "nodemailer": "^6.9.8",
     "ts-node": "^10.9.2",
     "winston": "^3.11.0"
